@@ -5,6 +5,7 @@
   import About from "./About.svelte";
   import SpineSection from "./SpineSection.svelte";
   import CaseStudy from "./CaseStudy.svelte";
+  import Profile from "./Profile.svelte";
 </script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -20,11 +21,10 @@
 <main>
   <Menu />
   <Section01 />
-
   <About />
   <CaseStudy />
+  <Profile />
   <SpineSection />
-
   <Section02 />
 </main>
 

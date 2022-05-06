@@ -1,7 +1,10 @@
 <script>
   import { fade } from "svelte/transition";
   let visible = true;
-  let active = false;
+  let active01 = false;
+  let active02 = false;
+  let active03 = false;
+
   function typewriter(node, { speed = 5 }) {
     const valid =
       node.childNodes.length === 1 &&
@@ -41,32 +44,6 @@
       });
     }
   });
-  /**
-   *
-   *
-  var slideIndex = 0;
-
-
-
-  export function showSlides() {
-    var i;
-    //console.log('area element id = ' + id);
-
-    var imageNumber = this.getAttribute("data-image-number");
-    //alert("The " + ele.innerHTML + " is a " + imageNumber + ".");
-    var slides = document.getElementsByClassName("mySlides");
-    var dots = document.getElementsByClassName("dot");
-    slides[imageNumber - 1].style.display = "none";
-
-    for (i = 0; i < slides.length; i++) {
-      slides[i].style.display = "none";
-    }
-
-    slides[imageNumber - 1].style.display = "block";
-
-
-  }
-   */
   const cases = [
     {
       no: "1",
@@ -88,12 +65,40 @@
     },
   ];
 
+  let password = "portfolioReview";
+  let passwordInput = "";
+  let showCase = false;
   let selectedCaseStudy = 0;
+  const checkPassword = () => {
+    if (passwordInput == password) {
+      showCase = true;
+      console.log("password is correct");
+    } else {
+      console.log("password is" + passwordInput);
+    }
+  };
+  const onKeyPress = (e) => {
+    if (e.charCode === 13) checkPassword();
+  };
 </script>
 
-<section>
-  {#if active}
-    <div class="light-box" on:click={() => (active = !active)}>
+<section class="case-section">
+  <div class="password-container">
+    <div class="title">Case Studies</div>
+    {#if showCase}{:else}
+      <p>Please enter password to view case studies</p>
+
+      <input
+        class="password-input"
+        bind:value={passwordInput}
+        on:keypress={onKeyPress}
+        placeholder="enter password"
+      />
+    {/if}
+  </div>
+  {#if active01}
+    <div class="light-box" on:click={() => (active01 = !active01)}>
+      <div class="pulseLoader" />
       <iframe
         style="border: 1px solid rgba(0, 0, 0, 0.1);"
         width="100%"
@@ -103,6 +108,53 @@
       />
     </div>
   {/if}
+  {#if active02}
+    <div class="light-box" on:click={() => (active02 = !active02)}>
+      <iframe
+        style="border: 1px solid rgba(0, 0, 0, 0.1);"
+        width="100%"
+        height="100%"
+        src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FGEmhtqmH0KbyOf2Si9efgw%2FPortfolio-2022%3Fpage-id%3D101%253A2099%26node-id%3D109%253A2654%26viewport%3D344%252C48%252C0.16%26scaling%3Dmin-zoom%26starting-point-node-id%3D109%253A2654"
+        allowfullscreen
+      />
+      <div class="pulseLoader" />
+    </div>
+  {/if}
+  {#if active03}
+    <div class="light-box" on:click={() => (active03 = !active03)}>
+      <iframe
+        style="border: 1px solid rgba(0, 0, 0, 0.1);"
+        width="100%"
+        height="100%"
+        src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FGEmhtqmH0KbyOf2Si9efgw%2FPortfolio-2022%3Fpage-id%3D101%253A2099%26node-id%3D351%253A2592%26viewport%3D344%252C48%252C0.38%26scaling%3Dmin-zoom%26starting-point-node-id%3D351%253A2592"
+        allowfullscreen
+      />
+      <div class="pulseLoader" />
+    </div>
+  {/if}
+
+  <div class="case-study-section" id="three">
+    <div class="case-container">
+      <div class="case-image">
+        <img class="screen-img" src="images/thumbnail.png" alt="" />
+      </div>
+      <div class="case-text">
+        <div class="case-title">CC4</div>
+
+        <div class="case-description">
+          As one of the 2 designers responsible for the Career Coach Platform,
+          it is important to me to push the quality of design, research and
+          operation in the product.
+          <br />Here's how we have tackled it over the last 180 days.
+        </div>
+        {#if showCase}
+          <button on:click={() => (active03 = !active03)}> Learn More </button>
+        {:else}
+          <img class="lock" src="images/lock.svg" alt="" />
+        {/if}
+      </div>
+    </div>
+  </div>
   <div class="case-study-section" id="three">
     <div class="case-container">
       <div class="case-image">
@@ -110,13 +162,20 @@
       </div>
       <div class="case-text">
         <div class="case-title">Ember Design Language System</div>
+
         <div class="case-description">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat.
+          Creating Singtel's Design Language System used across Digital
+          Experience team. Here is how we have build a living, breathing system
+          to cater to the needs of a growing design team over the course of 18
+          months.
         </div>
-        <button on:click={() => (active = !active)}> More </button>
+        {#if showCase}
+          <button on:click={() => (active01 = !active01)}>
+            Read Case Study
+          </button>
+        {:else}
+          <img class="lock" src="images/lock.svg" alt="" />
+        {/if}
       </div>
     </div>
   </div>
@@ -128,54 +187,56 @@
       <div class="case-text">
         <div class="case-title">hi!Carnival</div>
         <div class="case-description">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat.
+          Singtel's first award winning gamification project which helped to
+          drive MAU by 20% on our prepaid App.
         </div>
-        <button on:click={() => (active = !active)}> More </button>
-      </div>
-    </div>
-  </div>
-
-  <div class="case-study-section" id="three">
-    <div class="case-container">
-      <div class="case-image">
-        <img class="phone-img" src="images/phone-02.png" alt="" />
-      </div>
-      <div class="case-text">
-        <div class="case-title">StepUp</div>
-        <div class="case-description">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat.
-        </div>
-        <button on:click={() => (active = !active)}> More </button>
+        {#if showCase}
+          <button on:click={() => (active02 = !active02)}>
+            Read Case Study
+          </button>
+        {:else}
+          <img class="lock" src="images/lock.svg" alt="" />
+        {/if}
       </div>
     </div>
   </div>
 </section>
 
 <style>
+  button a {
+    color: black;
+  }
+
+  .lock {
+    margin-top: 24px;
+  }
   section {
-    height: auto;
     padding: 80px;
     padding-top: 0px;
-    background-color: white;
+    background-color: rgb(26, 26, 26);
+    height: auto;
   }
   button {
-    padding: 4px 8px;
+    padding: 8px 16px;
     margin: 16px 0px;
     font-family: "Barlow";
     transition: 0.2s all;
-    border-radius: 4px;
+    border-radius: 50px;
   }
+
   button:hover {
     background-color: rgba(22, 22, 22, 0.9);
     color: white;
   }
 
+  @keyframes slide-up {
+    0% {
+      height: 0px;
+    }
+    100% {
+      height: auto;
+    }
+  }
   .case-study-section {
     font-weight: 100;
     font-size: 16px;
@@ -184,30 +245,33 @@
     padding: 40px;
     margin: auto;
     height: auto;
-    width: 100vw;
+    width: 100%;
+
+    animation-name: slide-up;
+    animation-duration: 1.3s;
+    animation-fill-mode: forwards;
   }
+
   .case-title {
     position: static;
     width: 455px;
-    height: 128px;
-
+    padding-bottom: 16px;
     font-family: Playfair Display;
     font-style: normal;
     font-weight: bold;
     font-size: 48px;
     line-height: 50px;
-
-    color: #000000;
+    color: white;
   }
 
   .screen-img {
-    width: 500px;
+    width: 100%;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     transition: 0.3s all;
   }
 
   .phone-img {
-    height: 500px;
+    height: 100%;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     transition: 0.3s all;
   }
@@ -215,6 +279,15 @@
     transform: translateY(-2px);
     box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
       rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+  }
+  .password-input {
+    padding: 8px;
+    background: #ff000005;
+    color: white;
+    border: 1px solid #ff00003d;
+  }
+  .password-input:focus {
+    border: 2px solid red;
   }
   .phone-img:hover {
     transform: translateY(-2px);
@@ -231,7 +304,8 @@
     height: 100%;
     width: 50%;
     max-width: 500px;
-    padding: 80px;
+    padding-right: 80px;
+    font-weight: 400;
   }
   .case-container {
     display: flex;
@@ -240,6 +314,10 @@
     margin: auto;
     text-align: left;
     align-items: center;
+    color: white;
+  }
+  p {
+    color: white;
   }
   .light-box {
     position: fixed;
@@ -256,16 +334,53 @@
   .active {
     display: none;
   }
+  .title {
+    position: relative;
+    top: 0px;
+  }
   iframe {
     border-radius: 24px;
+    z-index: 10;
+    position: relative;
   }
   .case-image img {
     border-radius: 16px;
+  }
+
+  .pulseLoader {
+    width: 4em;
+    height: 4em;
+    border-radius: 4em;
+    background-color: #1a1a1a;
+    outline: 1px solid transparent;
+    animation: pulseanim 1.2s ease-in-out infinite;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    margin: auto;
+    z-index: 1;
+  }
+  .password-container {
+    text-align: center;
+    margin: 40px;
+  }
+  @keyframes pulseanim {
+    0% {
+      transform: scale(0);
+      opacity: 0.8;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 0;
+    }
   }
   @media only screen and (max-width: 800px) {
     section {
       padding: 0px;
     }
+
     iframe {
       border-radius: 0px;
     }
@@ -292,12 +407,14 @@
       margin: auto;
       height: auto;
       max-width: calc(100vw - 80px);
+      width: 100%;
     }
     .case-description {
       max-width: 600px;
       margin: auto;
       padding-top: 20px;
       max-width: calc(100vw - 80px);
+      color: white;
     }
     .case-image {
       width: 100%;

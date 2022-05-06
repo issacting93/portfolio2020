@@ -16,9 +16,14 @@ canvas {
   bottom: 0px;
 }
 .hero-section {
-  margin: auto;
-  height: 100vh;
-  width: 100%;
+    margin: auto;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+
 }
 .divBlobContainer {
   z-index: 11;
@@ -28,7 +33,20 @@ canvas {
   right: 0px;
   bottom: 0px;
 }
-
+input.password-input {
+  border-radius: 50px;
+  text-align: center;
+}
+button {
+  padding: 8px 16px;
+  margin: 10px 0px;
+  font-family: "Barlow";
+  transition: 0.2s all;
+  border-radius: 4px;
+  border-radius: 50px;
+  text-align: center;
+  background: white;
+}
 .fade-in {
   animation: fadein 2s;
 }
@@ -36,9 +54,11 @@ canvas {
 @keyframes fadein {
   from {
     opacity: 0;
+    transform: translateY(-20px);
   }
   to {
     opacity: 1;
+    transform: translateY(0px);
   }
 }
 
@@ -109,7 +129,6 @@ svg.grid-pt-02 {
   justify-content: space-between;
   display: flex;
   max-width: 1125px;
-  margin: auto;
   font-weight: 600;
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: black;
@@ -185,16 +204,27 @@ a[tabindex]:focus {
   outline: none;
 }
 
+@keyframes slide-out {
+  0% {
+    transform: translateY(-100%) scale(0);
+  }
+  100% {
+    transform: translateY(0%) scale(1);
+  }
+}
 .spine {
   margin: auto;
   width: fit-content;
   height: fit-content;
 
+  animation-name: slide-out;
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
   padding: 20px;
   left: 0px;
   position: absolute;
   right: 0px;
-  top: 0px;
+  top: -95px;
   display: flex;
   bottom: 0px;
 }
@@ -208,6 +238,7 @@ a[tabindex]:focus {
   left: 0;
   right: 0;
   transition: all 0.3s ease-in;
+  top: 95px;
 }
 
 .text-01 {
@@ -454,6 +485,7 @@ li:nth-child(7) {
 
 a {
   text-decoration: none;
+  font-weight: 300;
 }
 .el-01 {
   width: auto;
@@ -480,7 +512,7 @@ a {
 .top-menu {
   max-width: 85vw;
   margin: auto;
-  bottom: 0px;
+  top: 0px;
   position: absolute;
   width: 100%;
   padding: 20px;
@@ -491,7 +523,6 @@ a {
   justify-content: space-between;
   display: flex;
   max-width: 1125px;
-  margin: auto;
   font-weight: 600;
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: white;
@@ -499,15 +530,11 @@ a {
   font-size: 24px;
   transition: all 0.2s ease;
   cursor: pointer;
+  flex-direction: column;
+  align-content: flex-end;
+  align-items: flex-end;
 }
-.menu-container {
-  position: fixed;
-  width: 100%;
-  bottom: 0px;
-  padding: 20px;
-  z-index: 20;
-  background: rgba(1, 1, 1, 0.5);
-}
+
 .menu button {
   padding: 8px;
   transition: all 0.1s ease-in;
@@ -548,9 +575,10 @@ a {
 }
 
 section {
-  height: 100vh;
+  height: calc(100vh - 95px);
   position: relative;
-  overflow: hidden;
+
+  margin-top: 95px;
 }
 
 .section-02 {
@@ -613,9 +641,8 @@ ul {
   -moz-animation: neon2 1.5s ease-in-out infinite alternate;
   animation: neon2 1.5s ease-in-out infinite alternate;
   background: #052612;
-  mix-blend-mode: color-dodge;
-  box-shadow: inset 0px -10px 10px rgb(39 252 86 / 25%),
-    inset 0px 4px 10px 5px #1b9e40;
+  box-shadow: inset 0px -10px 10px rgba(252, 39, 39, 0.25),
+    inset 0px 4px 10px 5px #fc0606;
 }
 
 .spine-unit:hover + .experiment-list {
@@ -663,25 +690,23 @@ ul {
   position: relative;
   z-index: 10;
 }
+
 .spine-controller-ul {
   left: 0px;
-  bottom: -140px;
   right: 0px;
-  top: 0px;
   position: absolute;
+  bottom: 0px;
   display: flex;
   align-content: center;
   justify-content: space-around;
   width: fit-content;
   align-items: center;
-  transform: translateY(-50%);
   margin: auto;
   height: fit-content;
-  flex-direction: column;
+  flex-direction: row;
   transition: all 0.3s ease-out;
 }
 .spine-container:hover .spine-controller-ul {
-  top: 670px;
   bottom: 0px;
 }
 .spine-container:hover .spine-controller-ul li {
@@ -763,9 +788,10 @@ body {
   font-family: "Barlow", sans-serif;
   padding: 0px;
   margin: 0px;
+  font-weight: 400;
 }
-.mySlides {
-  display: none;
+p {
+  font-weight: 400;
 }
 /* Slideshow container */
 .slideshow-container {
@@ -773,7 +799,8 @@ body {
   position: absolute;
   margin: auto;
   width: 100vw;
-  height: 100vh;
+  height: calc(100vh - 95px);
+  margin-top: 95px;
 }
 
 /* Number text (1/3 etc) */
@@ -845,7 +872,7 @@ body {
   .terrain-container svg {
     opacity: 0.4;
     position: absolute;
-    top: 0px;
+    top: 40px;
     transform: scale(4.5);
   }
   .unit-list-top {

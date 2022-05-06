@@ -2,6 +2,7 @@
   import SpineUnitLeft from "./SVGSpineUnitLeft.svelte";
   import SpineUnitRight from "./SVGSpineUnitRight.svelte";
   import ScifiFrame from "./SVGscifiFrame.svelte";
+  import LCorner from "./LCorner.svelte";
 
   let visible = false;
 
@@ -45,14 +46,14 @@
     }
   });
   /**
- * 
- * 
+ *
+ *
 var slideIndex = 0;
 
 
 
 export function showSlides() {
-  var i; 
+  var i;
   //console.log('area element id = ' + id);
 
   var imageNumber = this.getAttribute("data-image-number");
@@ -60,68 +61,102 @@ export function showSlides() {
   var slides = document.getElementsByClassName("mySlides");
   var dots = document.getElementsByClassName("dot");
   slides[imageNumber - 1].style.display = "none";
-  
+
   for (i = 0; i < slides.length; i++) {
     slides[i].style.display = "none";
-  } 
- 
+  }
+
   slides[imageNumber - 1].style.display = "block";
- 
- 
-} 
+
+
+}
  */
   const projects = [
     {
       no: "1",
       id: "stealth",
       name: "Stealth Game Concept",
-      image: "/images/STEALTH.png",
+      image: " /images/STEALTH.png",
+      link: "https://www.behance.net/gallery/112545991/Pyke-Stealth-game",
     },
     {
       no: "2",
       id: "dark-future",
       name: "Dark Future",
-      image: "https://proj-ash.vercel.app/images/DARK FUTURE.png",
+      image: "images/DARK FUTURE.png",
+      link: "https://www.behance.net/gallery/71387117/Dark-Future",
     },
     {
       no: "3",
       id: "lynn",
       name: "lynn",
-      image: "https://proj-ash.vercel.app/images/LYNN.png",
+      image: "images/LYNN.png",
+      link: "https://zacting.itch.io/lynn",
     },
     {
       no: "4",
       id: "icarus",
       name: "ICARUS",
-      image: "https://proj-ash.vercel.app/images/ICARUS.png",
+      image: "/images/ICARUS.png",
+      link: "https://www.behance.net/gallery/99721631/STEAMPUNK-HUD-DESIGNS",
     },
     {
       no: "5",
       id: "division",
       name: "Division",
-      image: "https://proj-ash.vercel.app/images/THE DIVISION.png",
+      image: "images/THE DIVISION.png",
+      link: "https://www.behance.net/gallery/108280961/DIVISION-III-Fan-art",
     },
     {
       no: "6",
       id: "drifter",
       name: "Drifter",
-      image: "https://proj-ash.vercel.app/images/DRIFTER.png",
+      image: "/images/DRIFTER.png",
+      link: "https://www.youtube.com/watch?v=yK0yUYrHmXQ",
     },
     {
       no: "7",
       id: "blackmonarch",
       name: "Black Monarch ",
-      image: "https://proj-ash.vercel.app/images/Black Monarch.png",
+      image: "/images/Black Monarch.png",
+      link: "https://www.behance.net/gallery/108694895/The-Black-Monarch",
     },
   ];
 
   let selectedProject = 0;
 </script>
 
-<section class="section-03">
+<section class="section-03" id="personal-works">
+  <div class="frame-container"><ScifiFrame /></div>
+  <div class="text-container" />
+  <div class="slideshow-container">
+    <div class="mySlides ">
+      <img
+        src={projects[selectedProject].image}
+        alt={projects[selectedProject].name}
+        style="width:100%"
+      />
+    </div>
+  </div>
+  <div class="spine-container" id="spine-controller">
+    <ul class="spine-controller-ul dot-nav">
+      {#each projects as project, index}
+        <li
+          class="spine-unit dot"
+          on:mouseover={() => (selectedProject = index)}
+          on:focus={() => (selectedProject = index)}
+        >
+          <a href={projects[selectedProject].link} target="_blank">
+            • <span> <!--  {index + 1} --> </span>
+          </a>
+        </li>
+      {/each}
+    </ul>
+  </div>
+
   <div class="title">
     <svg
-      width="463"
+      width="100%"
       height="16"
       viewBox="0 0 463 16"
       fill="none"
@@ -147,206 +182,46 @@ export function showSlides() {
         fill="url(#paint1_linear_121_3913)"
         mask="url(#path-4-inside-2_121_3913)"
       />
-      <defs>
-        <linearGradient
-          id="paint0_linear_121_3913"
-          x1="40"
-          y1="8.5"
-          x2="13"
-          y2="8.5"
-          gradientUnits="userSpaceOnUse"
-        >
-          <stop stop-color="white" />
-          <stop offset="1" stop-color="white" stop-opacity="0" />
-        </linearGradient>
-        <linearGradient
-          id="paint1_linear_121_3913"
-          x1="423"
-          y1="7.5"
-          x2="450"
-          y2="7.5"
-          gradientUnits="userSpaceOnUse"
-        >
-          <stop stop-color="white" />
-          <stop offset="1" stop-color="white" stop-opacity="0" />
-        </linearGradient>
-      </defs>
     </svg>
   </div>
-  <div class="frame-container"><ScifiFrame /></div>
-  <div class="text-container">
-    <!--
-    <div class="top-left-el">
-      <div class="title"> Portfolio </div>
-      <div class="sub-title">27-21012-2421</div>
-    
-    </div>
-
-    <div class="el-01">
-      <div class="ripple"></div>
-      {#if visible}
-      <div class="connecting-01" >
-        <span in:typewriter out:typewriter>
-          connecting... 
-        </span>
-          
-       </div>{/if}
-    </div>-->
+  <div class="corners">
+    <LCorner />
+    <div class="mirror"><LCorner /></div>
   </div>
-  <div class="slideshow-container">
-    <div class="mySlides ">
-      <div class="numbertext">{projects[selectedProject].no} / 7</div>
-      <img
-        src={projects[selectedProject].image}
-        alt={projects[selectedProject].name}
-        style="width:100%"
-      />
-      <div class="text">
-        <a href="  https://www.behance.net/gallery/112545991/Pyke-Stealth-game">
-          {projects[selectedProject].name}
-        </a>
-      </div>
-    </div>
-    <!--  <div class="mySlides fade">
-        <div class="numbertext">2 / 7</div>
-        <img src="images/DARK FUTURE.png" style="width:100%" alt = "Dark Future">
-        <div class="text"> <a href="  https://www.behance.net/gallery/71387117/Dark-Future"> DARK FUTURE </a> </div>
-      </div>
-    
-      <div class="mySlides fade">
-        <div class="numbertext">3 / 7</div>
-        <img src="images/LYNN.png" style="width:100%" alt="lynn">
-        <div class="text"> <a href="https://zacting.itch.io/lynn"> LYNN </a> </div>
-      </div>
-     
-      <div class="mySlides fade">
-        <div class="numbertext">4 / 7</div>
-        <img src="images/ICARUS.png" style="width:100%" alt='Icarus'>
-        <div class="text"> <a href= "https://www.behance.net/gallery/99721631/STEAMPUNK-HUD-DESIGNS"> ICARUS </a> </div>
-      </div>
-      <div class="mySlides fade">
-        <div class="numbertext">5 / 7</div>
-        <img src="images/DRIFTER.png" style="width:100%" alt="drifter"> 
-        <div class="text"> <a href= "https://www.youtube.com/watch?v=yK0yUYrHmXQ"> DRIFTER </a> </div>
-      </div>
-      <div class="mySlides fade">
-        <div class="numbertext">6 / 7</div>
-        <img src="images/THE DIVISION.png" style="width:100%" alt="The Division Fan art">
-        <div class="text"> <a href="https://www.behance.net/gallery/108280961/DIVISION-III-Fan-art">The DIVISION (Fan Art) </a> </div>
-      </div>
-      <div class="mySlides fade">
-        <div class="numbertext">7 / 7</div>
-        <img src="images/Black Monarch.png" style="width:100%" alt="Black Monarch">
-        <div class="text"> <a href="https://www.behance.net/gallery/108694895/The-Black-Monarch">The Black Monarch </a> </div>
-      </div>-->
-  </div>
-  <div class="spine-container" id="spine-controller">
-    <div class=" ">
-      <div class="spine">
-        <ul class="spine-left">
-          <li>
-            <SpineUnitLeft />
-          </li>
-          <li><SpineUnitLeft /></li>
-          <li>
-            <SpineUnitLeft />
-          </li>
-          <li>
-            <SpineUnitLeft />
-          </li>
-          <li>
-            <SpineUnitLeft />
-          </li>
-          <li>
-            <SpineUnitLeft />
-          </li>
-          <li>
-            <SpineUnitLeft />
-          </li>
-        </ul>
-        <ul class="spine-right">
-          <li>
-            <SpineUnitRight />
-          </li>
-          <li>
-            <SpineUnitRight />
-          </li>
-          <li>
-            <SpineUnitRight />
-          </li>
-          <li>
-            <SpineUnitRight />
-          </li>
-          <li>
-            <SpineUnitRight />
-          </li>
-          <li>
-            <SpineUnitRight />
-          </li>
-          <li>
-            <SpineUnitRight />
-          </li>
-        </ul>
-      </div>
-    </div>
-    <ul class="spine-controller-ul dot-nav">
-      {#each projects as project, index}
-        <li
-          class="spine-unit dot"
-          on:mouseover={() => (selectedProject = index)}
-          on:focus={() => (selectedProject = index)}
-        >
-          <span>⚀ <!--  {index + 1} --> </span>
-        </li>
-      {/each}
-
-      <!-- 
-     <li class="spine-unit dot" on:mouseenter={showSlides}   data-image-number="1">
-          <span>⚀</span>
-        </li>
-        <li class="spine-unit dot"  on:mouseenter={showSlides}   data-image-number="2">
-          <span>⚀</span>
-        </li>
-        <li class="spine-unit dot" on:mouseenter={showSlides}  data-image-number="3">
-          <span>⚀</span>
-        </li>
-
- 
-   
-        <li class="spine-unit dot"  on:mouseenter={showSlides}  data-image-number="4">
-          <span>⚀</span>
-        </li>
-        <li class="spine-unit dot"  on:mouseenter={showSlides}  data-image-number="5">
-          <span>⚀</span>
-        </li>
-        <li class="spine-unit dot"  on:mouseenter={showSlides}  data-image-number="6">
-          <span>⚀</span>
-        </li>
-        <li class="spine-unit dot" on:mouseenter={showSlides}  data-image-number="7">
-          <span>⚀</span>
-        </li>
-             -->
-    </ul>
-  </div>
-  <!-- 
-      
-    <div class="select-text"> Select Memory </div>
-
-    -->
 </section>
 
 <style>
+  .title {
+    top: 0px;
+  }
   .frame-container {
     height: 100%;
     position: absolute;
     left: 0px;
     right: 0px;
-    top: 0px;
+    top: 95px;
     bottom: 0px;
     opacity: 0.6;
   }
+
+  .corners {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    bottom: 0px;
+    position: absolute;
+    padding: 0px 100px;
+    opacity: 0.2;
+    transition: all 3s;
+  }
+  .corners:hover {
+    opacity: 1;
+  }
+  .mirror {
+    transform: scaleX(-1);
+  }
   .spine-unit {
-    transition: all 1s;
+    transition: all 0.1s;
   }
   .section-03:hover .frame-container {
     display: block;
@@ -355,6 +230,37 @@ export function showSlides() {
     display: none;
   }
 
+  .spine-unit {
+    border-radius: 16px;
+    margin: 8px;
+    border: 1px solid white;
+    background: #f0232300;
+    cursor: pointer;
+    text-align: center;
+    height: 16px;
+    width: 16px;
+    margin: 2px;
+    transform: scale(0.2);
+  }
+
+  .spine-container:hover .spine-controller-ul {
+    bottom: 0px;
+    margin: auto;
+  }
+
+  .spine-unit:hover {
+    box-shadow: inset 0px -10px 10px rgba(182, 55, 55, 0.205),
+      inset 0px 4px 10px 5px rgb(235, 33, 7);
+    transform: scale(0.6);
+    color: rgba(1, 1, 1, 0);
+  }
+
+  .spine-container:hover .spine-controller-ul li {
+    margin: 10px;
+    height: 16px;
+    width: 16px;
+    transform: scale(1);
+  }
   .frame-container:hover {
     opacity: 0.1;
   }
@@ -375,6 +281,9 @@ export function showSlides() {
     background: white;
     color: black;
   }
+  a {
+    color: #ffffff00;
+  }
 
   @media only screen and (max-width: 800px) {
     #spine-controller {
@@ -385,7 +294,7 @@ export function showSlides() {
     }
 
     .spine-container:hover .spine-controller-ul li {
-      transform: scale(2);
+      transform: scale(1);
       margin-top: 75px;
     }
     .text {
@@ -399,6 +308,11 @@ export function showSlides() {
       align-items: baseline;
       height: auto;
       align-content: space-evenly;
+    }
+    .mySlides img {
+      padding: 20px;
+      height: 100%;
+      margin-bottom: 40px;
     }
     .text a {
       background: rgba(1, 1, 1, 0.5);
