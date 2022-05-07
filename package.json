@@ -21,6 +21,6 @@
   },
   "dependencies": {
     "sirv-cli": "^1.0.0",
-    "vercel": "^23.1.2"
+    "vercel": "^24.2.0"
   }
 }
